@@ -24,6 +24,10 @@ export default function useHeroAnimation(rootRef) {
         y: 20,
       })
 
+      gsap.set(car, {
+        x: 0,
+      })
+
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: root,
@@ -37,7 +41,7 @@ export default function useHeroAnimation(rootRef) {
       timeline.to(
         car,
         {
-          x: () => window.innerWidth * 0.32,
+          x: () => window.innerWidth * 0.8,
           ease: 'none',
           duration: 5,
         },
@@ -49,9 +53,9 @@ export default function useHeroAnimation(rootRef) {
         {
           autoAlpha: 1,
           y: 0,
-          stagger: 0.13,
+          stagger: 0.1,
+          duration: 0.25,
           ease: 'power1.out',
-          duration: 0.3,
         },
         0.3
       )
@@ -62,10 +66,10 @@ export default function useHeroAnimation(rootRef) {
           autoAlpha: 1,
           y: 0,
           stagger: 0.55,
-          ease: 'power1.out',
           duration: 0.5,
+          ease: 'power1.out',
         },
-        2.2
+        1.5
       )
     }, root)
 
