@@ -1,3 +1,4 @@
+
 import { useLayoutEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -14,6 +15,8 @@ export default function useHeroAnimation(rootRef) {
       const stats = root.querySelectorAll('.stat-item')
       const arrow = root.querySelector('[data-arrowhead]')
       const trail = root.querySelector('[data-arrow-trail]')
+
+      const travelDistance = () => window.innerWidth * 0.92
 
       gsap.set(letters, { autoAlpha: 0, y: 12 })
       gsap.set(stats, { autoAlpha: 0, y: 18 })
@@ -33,7 +36,7 @@ export default function useHeroAnimation(rootRef) {
       timeline.to(
         arrow,
         {
-          x: () => window.innerWidth * 0.82,
+          x: travelDistance,
           duration: 6,
           ease: 'none',
         },
@@ -43,7 +46,7 @@ export default function useHeroAnimation(rootRef) {
       timeline.to(
         trail,
         {
-          width: () => window.innerWidth * 0.82,
+          width: travelDistance,
           duration: 6,
           ease: 'none',
         },
@@ -63,15 +66,17 @@ export default function useHeroAnimation(rootRef) {
       )
 
       stats.forEach((stat, index) => {
+        const revealPosition = 1.5 + index * 1.1
+
         timeline.to(
           stat,
           {
             autoAlpha: 1,
             y: 0,
-            duration: 0.35,
+            duration: 0.25,
             ease: 'power1.out',
           },
-          1.5 + index * 0.8
+          revealPosition
         )
       })
     }, root)
