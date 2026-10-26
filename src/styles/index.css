@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  font-family: 'DM Sans', sans-serif;
+  color: #20211f;
+  background: #f4f2ec;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hero-section {
+  position: relative;
+  height: 190svh;
+  background: #f4f2ec;
+}
+
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-sticky::before,
+.hero-sticky::after {
+  position: absolute;
+  content: '';
+  border: 1px solid rgba(32, 33, 31, 0.08);
+  border-radius: 50%;
+  left: 50%;
+  top: 53%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.hero-sticky::before {
+  width: 540px;
+  height: 540px;
+}
+
+.hero-sticky::after {
+  width: 390px;
+  height: 390px;
+}
+
+.site-header {
+  position: relative;
+  z-index: 5;
+  padding: 25px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(32, 33, 31, 0.1);
+}
+
+.brand {
+  font: 700 25px 'Space Grotesk', sans-serif;
+  letter-spacing: -1.5px;
+}
+
+.brand span,
+.headline-second {
+  color: #e65d37;
+}
+
+.header-tag,
+.contact-link {
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.header-tag {
+  color: #77766f;
+}
+
+.contact-link {
+  font-weight: 700;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  padding: 5vh 5% 0;
+  pointer-events: none;
+}
+
+.headline {
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 20px;
+  color: #e65d37;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.headline h1 {
+  margin: 0;
+  font: 600 clamp(40px, 8vw, 104px)/0.95 'Space Grotesk', sans-serif;
+  letter-spacing: 0.12em;
+}
+
+.headline h1 span {
+  display: block;
+}
+
+.hero-description {
+  margin: 18px 0 0;
+  color: #77766f;
+  font-size: 13px;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: clamp(30px, 8vw, 110px);
+  margin-top: 30px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  margin: 0;
+  font: 600 clamp(23px, 3vw, 34px) 'Space Grotesk', sans-serif;
+}
+
+.stat-label {
+  margin: 5px 0 0;
+  color: #77766f;
+  font-size: 10px;
+}
+
+.scroll-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.car-container {
+  position: absolute;
+  left: 0;
+  top: 48%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.car-image {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(85vw, 1050px);
+  max-height: 43svh;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 25px 22px rgba(0, 0, 0, 0.13));
+}
+
+.car-glow {
+  position: absolute;
+  width: 65vw;
+  height: 100px;
+  top: 60%;
+  border-radius: 50%;
+  background: rgba(230, 93, 55, 0.14);
+  filter: blur(45px);
+}
+
+.scene-label {
+  position: absolute;
+  top: 59%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #77766f;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.scene-label span:first-child {
+  color: #20211f;
+  font-weight: 700;
+}
+
+.scene-label-left {
+  left: 6%;
+}
+
+.scene-label-right {
+  right: 6%;
+  align-items: flex-end;
+}
+
+.scroll-line {
+  width: 50px;
+  height: 1px;
+  background: #e65d37;
+}
+
+.scene-index {
+  position: absolute;
+  right: 6%;
+  bottom: 11%;
+  color: rgba(32, 33, 31, 0.17);
+  font: 700 44px 'Space Grotesk', sans-serif;
+}
+
+.hero-footer {
+  position: absolute;
+  z-index: 4;
+  bottom: 22px;
+  left: 6%;
+  right: 6%;
+  display: flex;
+  justify-content: space-between;
+  color: #77766f;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 175svh;
+  }
+
+  .hero-sticky {
+    min-height: 560px;
+  }
+
+  .site-header {
+    padding: 22px 5%;
+  }
+
+  .brand {
+    font-size: 21px;
+  }
+
+  .header-tag {
+    display: none;
+  }
+
+  .hero-content {
+    padding-top: 7vh;
+  }
+
+  .eyebrow {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+
+  .headline h1 {
+    font-size: clamp(32px, 8.5vw, 60px);
+    letter-spacing: 0.06em;
+  }
+
+  .hero-description {
+    font-size: 11px;
+  }
+
+  .stats {
+    gap: 22px;
+    margin-top: 28px;
+  }
+
+  .stat-value {
+    font-size: 23px;
+  }
+
+  .stat-label {
+    max-width: 90px;
+    line-height: 1.5;
+  }
+
+  .car-container {
+    top: 53%;
+  }
+
+  .car-image {
+    width: 110vw;
+    max-width: none;
+    max-height: 32svh;
+  }
+
+  .scene-label {
+    top: 70%;
+    font-size: 8px;
+  }
+
+  .scene-index {
+    font-size: 30px;
+  }
+
+  .hero-footer {
+    font-size: 7px;
+    letter-spacing: 0.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section {
+    height: 100svh;
+  }
+
+  .hero-sticky {
+    position: relative;
+  }
+}
