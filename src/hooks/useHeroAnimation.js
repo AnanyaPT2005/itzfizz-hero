@@ -1,4 +1,3 @@
-
 import { useLayoutEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -12,7 +11,7 @@ export default function useHeroAnimation(rootRef) {
 
     const ctx = gsap.context(() => {
       const letters = root.querySelectorAll('.headline-letter')
-      const stats = root.querySelectorAll('.stat-item')
+      const stats = Array.from(root.querySelectorAll('.stat-item'))
       const arrow = root.querySelector('[data-arrowhead]')
       const trail = root.querySelector('[data-arrow-trail]')
 
@@ -22,6 +21,15 @@ export default function useHeroAnimation(rootRef) {
       gsap.set(stats, { autoAlpha: 0, y: 18 })
       gsap.set(arrow, { x: 0 })
       gsap.set(trail, { width: 0 })
+
+      gsap.to(letters, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.06,
+        ease: 'power2.out',
+        delay: 0.15,
+      })
 
       const timeline = gsap.timeline({
         scrollTrigger: {
@@ -53,21 +61,19 @@ export default function useHeroAnimation(rootRef) {
         0
       )
 
-      timeline.to(
-        letters,
-        {
-          autoAlpha: 1,
-          y: 0,
-          stagger: 0.12,
-          duration: 0.3,
-          ease: 'power1.out',
-        },
-        0.2
-      )
+      const revealPositions = stats.map((stat) => {
+        const statCenter =
+          stat.getBoundingClientRect().left +
+          stat.getBoundingClientRect().width / 2
+
+        return gsap.utils.clamp(
+          0,
+          5.7,
+          (statCenter / travelDistance()) * 6
+        )
+      })
 
       stats.forEach((stat, index) => {
-        const revealPosition = 1.5 + index * 1.1
-
         timeline.to(
           stat,
           {
@@ -76,7 +82,7 @@ export default function useHeroAnimation(rootRef) {
             duration: 0.25,
             ease: 'power1.out',
           },
-          revealPosition
+          revealPositions[index]
         )
       })
     }, root)
