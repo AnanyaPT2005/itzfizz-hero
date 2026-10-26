@@ -7,7 +7,6 @@ gsap.registerPlugin(ScrollTrigger)
 export default function useHeroAnimation(rootRef) {
   useLayoutEffect(() => {
     const root = rootRef.current
-
     if (!root) return
 
     const ctx = gsap.context(() => {
@@ -15,27 +14,39 @@ export default function useHeroAnimation(rootRef) {
       const stats = root.querySelectorAll('.stat-item')
       const car = root.querySelector('[data-car]')
 
-      gsap.set([headline, stats], { autoAlpha: 0 })
+      if (!headline || !stats.length || !car) return
+
+      gsap.set(headline, {
+        autoAlpha: 0,
+        y: 35,
+      })
+
+      gsap.set(stats, {
+        autoAlpha: 0,
+        y: 20,
+      })
 
       const intro = gsap.timeline({
-        defaults: { ease: 'power3.out' },
+        defaults: {
+          ease: 'power3.out',
+        },
       })
 
       intro
-        .fromTo(
-          headline,
-          { y: 30 },
-          { autoAlpha: 1, y: 0, duration: 0.9 }
-        )
+        .to(headline, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 1,
+        })
         .to(
           stats,
           {
             autoAlpha: 1,
             y: 0,
-            duration: 0.6,
-            stagger: 0.15,
+            duration: 0.65,
+            stagger: 0.2,
           },
-          '-=0.3'
+          '-=0.35'
         )
 
       gsap.fromTo(
