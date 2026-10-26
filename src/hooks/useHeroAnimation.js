@@ -12,21 +12,13 @@ export default function useHeroAnimation(rootRef) {
     const ctx = gsap.context(() => {
       const letters = root.querySelectorAll('.headline-letter')
       const stats = root.querySelectorAll('.stat-item')
-      const car = root.querySelector('[data-car]')
+      const arrow = root.querySelector('[data-arrowhead]')
+      const trail = root.querySelector('[data-arrow-trail]')
 
-      gsap.set(letters, {
-        autoAlpha: 0,
-        y: 18,
-      })
-
-      gsap.set(stats, {
-        autoAlpha: 0,
-        y: 20,
-      })
-
-      gsap.set(car, {
-        x: 0,
-      })
+      gsap.set(letters, { autoAlpha: 0, y: 12 })
+      gsap.set(stats, { autoAlpha: 0, y: 18 })
+      gsap.set(arrow, { x: 0 })
+      gsap.set(trail, { width: 0 })
 
       const timeline = gsap.timeline({
         scrollTrigger: {
@@ -39,11 +31,21 @@ export default function useHeroAnimation(rootRef) {
       })
 
       timeline.to(
-        car,
+        arrow,
         {
-          x: () => window.innerWidth * 0.8,
+          x: () => window.innerWidth * 0.82,
+          duration: 6,
           ease: 'none',
-          duration: 5,
+        },
+        0
+      )
+
+      timeline.to(
+        trail,
+        {
+          width: () => window.innerWidth * 0.82,
+          duration: 6,
+          ease: 'none',
         },
         0
       )
@@ -53,24 +55,25 @@ export default function useHeroAnimation(rootRef) {
         {
           autoAlpha: 1,
           y: 0,
-          stagger: 0.1,
-          duration: 0.25,
+          stagger: 0.12,
+          duration: 0.3,
           ease: 'power1.out',
         },
-        0.3
+        0.2
       )
 
-      timeline.to(
-        stats,
-        {
-          autoAlpha: 1,
-          y: 0,
-          stagger: 0.55,
-          duration: 0.5,
-          ease: 'power1.out',
-        },
-        1.5
-      )
+      stats.forEach((stat, index) => {
+        timeline.to(
+          stat,
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.35,
+            ease: 'power1.out',
+          },
+          1.5 + index * 0.8
+        )
+      })
     }, root)
 
     return () => ctx.revert()

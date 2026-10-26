@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
@@ -15,14 +16,14 @@
   box-sizing: border-box;
 }
 
-html {
-  margin: 0;
-  scroll-behavior: auto;
-}
-
+html,
 body {
   margin: 0;
   min-width: 320px;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 #root {
@@ -50,34 +51,32 @@ body {
 .hero-content {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: flex-start;
-  padding: 12vh 6% 0;
+  padding: 12vh 5% 0;
 }
 
 .headline {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   width: 100%;
   max-width: 100%;
 }
 
 .headline h1 {
   display: flex;
-  flex-wrap: nowrap;
   align-items: center;
+  flex-wrap: nowrap;
   white-space: nowrap;
-  width: max-content;
-  max-width: none;
+  width: 100%;
   margin: 0;
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(24px, 6.5vw, 92px);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: 0.08em;
+  line-height: 1.15;
+  letter-spacing: 0.025em;
 }
 
 .headline-letter {
@@ -88,14 +87,18 @@ body {
 }
 
 .stats {
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 5%;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  width: 100%;
-  max-width: 1200px;
-  margin-top: 35px;
+  align-items: center;
+  gap: clamp(14px, 2.5vw, 36px);
+  width: 90%;
+  min-height: 190px;
+  padding: 24px 0;
+  transform: translateY(-50%);
 }
 
 .stat-item {
@@ -107,135 +110,130 @@ body {
 .stat-value {
   margin: 0;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(22px, 2.7vw, 38px);
+  font-size: clamp(26px, 3.5vw, 48px);
   font-weight: 700;
   line-height: 1.2;
+  color: #20211f;
 }
 
 .stat-label {
-  margin: 8px 0 0;
-  color: #77766f;
-  font-size: 11px;
+  margin: 12px 0 0;
+  color: #383832;
+  font-size: clamp(12px, 1.25vw, 16px);
+  font-weight: 500;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .scroll-scene {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 1;
   pointer-events: none;
 }
 
-.car-container {
+.arrow-trail {
   position: absolute;
-  top: 25%;
-  left: -30vw;
-  width: min(90vw, 1100px);
-  height: 55%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  will-change: transform;
+  top: 50%;
+  left: 0;
+  width: 0;
+  height: 190px;
+  background: #f07832;
+  transform: translateY(-50%);
+  will-change: width;
 }
 
-.car-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  mix-blend-mode: multiply;
-  filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.12));
+.arrowhead {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 95px solid transparent;
+  border-bottom: 95px solid transparent;
+  border-left: 68px solid #f07832;
+  transform: translateY(-50%);
+  will-change: transform;
 }
 
 .scroll-indicator {
   position: absolute;
-  right: 6%;
-  bottom: 35px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  color: #77766f;
-  font-size: 10px;
+  right: 5%;
+  bottom: 28px;
+  padding: 12px 18px;
+  border: 1px solid #f07832;
+  border-radius: 30px;
+  background: #20211f;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 2px;
-}
-
-.scroll-line {
-  display: block;
-  width: 45px;
-  height: 1px;
-  background: #e65d37;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 @media (min-width: 1400px) {
   .hero-content {
-    padding: 13vh 8% 0;
+    padding-left: 7%;
+    padding-right: 7%;
+  }
+
+  .stats {
+    left: 7%;
+    width: 86%;
   }
 }
 
 @media (max-width: 768px) {
-  .hero-section {
-    height: 220vh;
-  }
-
-  .hero-sticky {
-    min-height: 500px;
-  }
-
   .hero-content {
-    padding: 13vh 5% 0;
+    padding: 13vh 4% 0;
   }
 
   .headline h1 {
-    font-size: clamp(18px, 5.7vw, 42px);
-    letter-spacing: 0.02em;
+    font-size: clamp(20px, 6.2vw, 48px);
+    letter-spacing: 0;
   }
 
   .stats {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    left: 4%;
+    width: 92%;
+    min-height: 150px;
     gap: 12px;
-    margin-top: 28px;
+    padding: 18px 0;
   }
 
   .stat-value {
-    font-size: clamp(16px, 4vw, 24px);
+    font-size: clamp(20px, 4.2vw, 32px);
   }
 
   .stat-label {
-    font-size: 9px;
+    margin-top: 8px;
+    font-size: clamp(10px, 2vw, 13px);
     line-height: 1.4;
-    overflow-wrap: anywhere;
   }
 
-  .car-container {
-    left: -55vw;
-    top: 30%;
-    width: 110vw;
-    height: 42%;
+  .arrow-trail {
+    height: 150px;
   }
 
-  .car-image {
-    width: 100%;
-    max-width: none;
+  .arrowhead {
+    border-top-width: 75px;
+    border-bottom-width: 75px;
+    border-left-width: 48px;
   }
 
   .scroll-indicator {
-    right: 5%;
-    bottom: 24px;
-    gap: 10px;
-    font-size: 8px;
-    letter-spacing: 1.2px;
-  }
-
-  .scroll-line {
-    width: 28px;
+    right: 4%;
+    bottom: 20px;
+    padding: 10px 14px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
   }
 }
 
 @media (max-width: 380px) {
   .headline h1 {
-    font-size: 17px;
-    letter-spacing: 0;
+    font-size: 18px;
+    letter-spacing: -0.02em;
   }
 
   .stats {
@@ -243,11 +241,21 @@ body {
   }
 
   .stat-value {
-    font-size: 15px;
+    font-size: 18px;
   }
 
   .stat-label {
-    font-size: 8px;
+    font-size: 9px;
+  }
+
+  .arrow-trail {
+    height: 130px;
+  }
+
+  .arrowhead {
+    border-top-width: 65px;
+    border-bottom-width: 65px;
+    border-left-width: 40px;
   }
 }
 
