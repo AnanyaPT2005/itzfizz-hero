@@ -1,7 +1,20 @@
 const stats = [
-  { value: '98%', label: 'Client Satisfaction' },
-  { value: '120+', label: 'Projects Delivered' },
-  { value: '4.9/5', label: 'Average Rating' },
+  {
+    value: '58%',
+    label: 'Increase in pick up point use',
+  },
+  {
+    value: '23%',
+    label: 'Decrease in customer phone calls',
+  },
+  {
+    value: '27%',
+    label: 'Increase in pick up point use',
+  },
+  {
+    value: '40%',
+    label: 'Decrease in customer phone calls',
+  },
 ]
 
 export default stats

@@ -10,15 +10,13 @@ export default function useHeroAnimation(rootRef) {
     if (!root) return
 
     const ctx = gsap.context(() => {
-      const headline = root.querySelector('[data-headline]')
+      const letters = root.querySelectorAll('.headline-letter')
       const stats = root.querySelectorAll('.stat-item')
       const car = root.querySelector('[data-car]')
 
-      if (!headline || !stats.length || !car) return
-
-      gsap.set(headline, {
+      gsap.set(letters, {
         autoAlpha: 0,
-        y: 35,
+        y: 18,
       })
 
       gsap.set(stats, {
@@ -26,49 +24,48 @@ export default function useHeroAnimation(rootRef) {
         y: 20,
       })
 
-      const intro = gsap.timeline({
-        defaults: {
-          ease: 'power3.out',
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: root,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.6,
+          invalidateOnRefresh: true,
         },
       })
 
-      intro
-        .to(headline, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 1,
-        })
-        .to(
-          stats,
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.65,
-            stagger: 0.2,
-          },
-          '-=0.35'
-        )
-
-      gsap.fromTo(
+      timeline.to(
         car,
         {
-          xPercent: -15,
-          scale: 0.8,
-          rotation: -3,
-        },
-        {
-          xPercent: 15,
-          scale: 1.05,
-          rotation: 2,
+          x: () => window.innerWidth * 0.32,
           ease: 'none',
-          scrollTrigger: {
-            trigger: root,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1,
-            invalidateOnRefresh: true,
-          },
-        }
+          duration: 5,
+        },
+        0
+      )
+
+      timeline.to(
+        letters,
+        {
+          autoAlpha: 1,
+          y: 0,
+          stagger: 0.13,
+          ease: 'power1.out',
+          duration: 0.3,
+        },
+        0.3
+      )
+
+      timeline.to(
+        stats,
+        {
+          autoAlpha: 1,
+          y: 0,
+          stagger: 0.55,
+          ease: 'power1.out',
+          duration: 0.5,
+        },
+        2.2
       )
     }, root)
 
